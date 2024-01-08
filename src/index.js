@@ -34,10 +34,43 @@ class toDo {
 }
 
 
+/* Need to be able to edit and delete stuff as well, remember it should be functional in console and 
+dom should only need to read data, not edit it */ 
+
+/* could add a fn in the project class to allow this */ 
+class Project {
+    constructor(title) {
+        this.title = title
+        this.array = []
+    }
+    
+    addNewtoDo() {
+        const swag = new toDo("kys", "kys2", "kys3", "kys4", "kys5")
+        this.array.push(swag)
+        
+    }
+
+    newProjectPrint() {
+        console.log(this.title)
+        console.log(this.array)
+    }
+
+    gettoDos() {
+        return this.array
+    }
+     
+}
+
+
+const newProject = new Project("Cool title")
+newProject.addNewtoDo()
+newProject.newProjectPrint()
+
+
 
 const swag = new toDo("do stuff", "do some stuff innit", "some point", "idk", "these some notes!")
 
 
-
 swag.toDoPrint()
-
+let swagger = newProject.gettoDos()
+console.log(swagger)
