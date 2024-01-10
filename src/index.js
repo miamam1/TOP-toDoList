@@ -1,11 +1,8 @@
 import './style.css';
+import { navBar } from './interface';
 
 
 
-const myNuts = document.createElement("h1")
-myNuts.classList.add("'myNuts")
-myNuts.textContent = "asd"
-document.body.append(myNuts)
 
 
 /* view examples of what to do, try to implement the SOLID principles talked about but probably
@@ -28,9 +25,8 @@ class toDo {
         this.complete = "incomplete"
     }
     
-    toDoPrint() {
-        console.log(this.title, this.description, this.dueDate, this.notes)
-        return "return statement here todoprint()"
+    getInfo() {
+        return [this.title, this.description, this.dueDate, this.priority, this.notes, this.complete]
         
     }
 
@@ -75,6 +71,10 @@ class Project {
         this.array.push(newtoDo)
     }
 
+    deletetoDo(index) {
+        return this.array.splice(index, 1)
+    }
+
     newProjectPrint() {
         console.log(this.title)
         console.log(this.array)
@@ -84,17 +84,24 @@ class Project {
         return this.array
     }
 
+    
+
 }
 
 
 const newProject = new Project("Cool title")
 newProject.addNewtoDo("kys", "kys2", "kys3", "kys4", "kys5")
 newProject.addNewtoDo("asd", "asd", "asd", "asd", "asd")
+newProject.addNewtoDo("why", "what", "when", "where", "kysfuckingni")
+console.log("First print before changing to complete")
 newProject.newProjectPrint()
 const gettoDos = newProject.gettoDos()
-gettoDos[0].changetoComplete()
+console.log("after")
 gettoDos[0].changePriority("medium")
+console.log(gettoDos[0].getInfo())
+newProject.deletetoDo(1)
 newProject.newProjectPrint()
 
 
 
+navBar()
