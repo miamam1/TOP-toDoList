@@ -25,17 +25,43 @@ class toDo {
         this.dueDate = dueDate
         this.priority = priority
         this.notes = notes
+        this.complete = "incomplete"
     }
     
     toDoPrint() {
         console.log(this.title, this.description, this.dueDate, this.notes)
+        return "return statement here todoprint()"
+        
     }
+
+    /* when calling these functions for some reason updates weirdly, e.g. if there is a new todo, yhou print it, and do this function afterwards, it will still
+    be listed as complete
+    1. console.log(todo) <- what 3 said 
+    2. changetocomplete()
+    3. console.log(todo) <- these will both be the same
+    */
+    changetoComplete() {
+        return this.complete = "complete"
+        
+    }
+
+    changetoinComplete() {
+        return this.complete = "incomplete"
+    }
+
+    changePriority(newPriority) {
+        return this.priotity = newPriority
+    }
+
 
 }
 
 
-/* Need to be able to edit and delete stuff as well, remember it should be functional in console and 
-dom should only need to read data, not edit it */ 
+/* Added ability to add new to dos,
+change to complete/incomplete and change priotity
+need to:
+add ability to edit/delete to dos and projects
+make sure DOM logic is seperate  */ 
 
 /* could add a fn in the project class to allow this */ 
 class Project {
@@ -44,10 +70,9 @@ class Project {
         this.array = []
     }
     
-    addNewtoDo() {
-        const swag = new toDo("kys", "kys2", "kys3", "kys4", "kys5")
-        this.array.push(swag)
-        
+    addNewtoDo(title, description, dueDate, priority, notes) {
+        const newtoDo = new toDo(title, description, dueDate, priority, notes)
+        this.array.push(newtoDo)
     }
 
     newProjectPrint() {
@@ -58,19 +83,18 @@ class Project {
     gettoDos() {
         return this.array
     }
-     
+
 }
 
 
 const newProject = new Project("Cool title")
-newProject.addNewtoDo()
+newProject.addNewtoDo("kys", "kys2", "kys3", "kys4", "kys5")
+newProject.addNewtoDo("asd", "asd", "asd", "asd", "asd")
+newProject.newProjectPrint()
+const gettoDos = newProject.gettoDos()
+gettoDos[0].changetoComplete()
+gettoDos[0].changePriority("medium")
 newProject.newProjectPrint()
 
 
 
-const swag = new toDo("do stuff", "do some stuff innit", "some point", "idk", "these some notes!")
-
-
-swag.toDoPrint()
-let swagger = newProject.gettoDos()
-console.log(swagger)
