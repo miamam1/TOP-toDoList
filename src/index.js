@@ -1,5 +1,5 @@
 import './style.css';
-import { navBar } from './interface';
+import { navBar, newProjectUI, sideBar } from './interface';
 
 
 
@@ -105,3 +105,15 @@ newProject.newProjectPrint()
 
 
 navBar()
+
+/* doing this in interface causes an error. I don't know why but has to be something to do with initialization order with the project class*/
+newProjectUI("home")
+newProjectUI("Today")
+newProjectUI("A project")
+
+sideBar()
+export {
+    toDo,
+    Project
+
+}
