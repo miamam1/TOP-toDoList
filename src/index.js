@@ -89,29 +89,31 @@ class Project {
 }
 
 
-const newProject = new Project("Cool title")
-newProject.addNewtoDo("kys", "kys2", "kys3", "kys4", "kys5")
-newProject.addNewtoDo("asd", "asd", "asd", "asd", "asd")
-newProject.addNewtoDo("why", "what", "when", "where", "kysfuckingni")
-console.log("First print before changing to complete")
-newProject.newProjectPrint()
-const gettoDos = newProject.gettoDos()
-console.log("after")
-gettoDos[0].changePriority("medium")
-console.log(gettoDos[0].getInfo())
-newProject.deletetoDo(1)
-newProject.newProjectPrint()
 
 
+
+let projects = []
 
 navBar()
 
 /* doing this in interface causes an error. I don't know why but has to be something to do with initialization order with the project class*/
-newProjectUI("home")
-newProjectUI("Today")
-newProjectUI("A project")
 
-sideBar()
+
+newProjectUI("home", projects)
+newProjectUI("Today", projects)
+newProjectUI("A project", projects)
+sideBar(projects)
+projects[0].addNewtoDo("kys1", "kys2", "kys3", "kys4", "kys5")
+projects[0].addNewtoDo("kys1", "kys2", "kys3", "kys4", "kys5")
+projects[0].addNewtoDo("kys1", "kys2", "kys3", "kys4", "kys5")
+console.log(projects[0].gettoDos())
+/* big brain, could use the method above for functions for DOM or smth */ 
+/* also check emails send myself an image */ 
+const project2 = projects[0].gettoDos()
+project2[0].changetoComplete()
+console.log(projects[0])
+console.log(projects)
+
 export {
     toDo,
     Project

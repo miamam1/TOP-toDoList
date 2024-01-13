@@ -21,8 +21,8 @@ function navBar() {
 
 
 /* have a list of projects that gets added to everytime a new project is made */
-let projects = []
-function sideBar() {
+
+function sideBar(projects) {
     const sideBarContainer = document.createElement("div")
     sideBarContainer.classList.add("sideBarContainer")
     for(let i = 0; i < projects.length; i++) {
@@ -51,15 +51,16 @@ the previous project with restaraunts
 
 
 
-function newProjectUI(name) {
+function newProjectUI(name, projects) {
     const project = new Project(name)
     projects.push(project)
     return 
 }
 
-console.log(projects)
+
 /* so our current problem: can't access the projects list of to dos */
-console.log(projects[0])
+
+
 
 export {
     navBar,
