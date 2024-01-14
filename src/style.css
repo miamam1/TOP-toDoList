@@ -18,7 +18,7 @@ body {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
 .navbar { 
@@ -108,12 +108,16 @@ button:focus  {
   display: flex;
   flex-direction: column;
   width: 10%;
-  flex-grow: 1;
+  
   height: 90vh;
   justify-content: space-around;
   
 }
 
-.projectContainer {
-  
+
+
+#contentContainer {
+  display: flex;
+  gap: 250px;
 }
+

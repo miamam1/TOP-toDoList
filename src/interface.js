@@ -23,6 +23,7 @@ function navBar() {
 /* have a list of projects that gets added to everytime a new project is made */
 
 function sideBar(projects) {
+    const contentContainer = document.getElementById("contentContainer")
     const sideBarContainer = document.createElement("div")
     sideBarContainer.classList.add("sideBarContainer")
     for(let i = 0; i < projects.length; i++) {
@@ -33,18 +34,24 @@ function sideBar(projects) {
         button.classList.add("sideBarProject")
         button.onclick = function () {
             projectShowcase(projects, i)
+            
         }
         sideBarContainer.append(button)
         
     }
     /* have stuff here for the buttons that has an onclick using the i, using the function below */
-     document.body.append(sideBarContainer)
+     contentContainer.append(sideBarContainer)
     
 
 }
 
 
 function projectShowcase(projects, index) {
+    const eraser = document.getElementsByClassName("projectContainer")
+    for(let i = 0; i < eraser.length; i++) {
+        eraser[0].parentNode.removeChild(eraser[0])
+    }
+    const contentContainer = document.getElementById("contentContainer")
     const project = projects[index].gettoDos()
     const projectContainer = document.createElement("div")
     let toDoInfo
@@ -58,15 +65,12 @@ function projectShowcase(projects, index) {
         const priorityText = document.createElement("p")
         priorityText.textContent = toDoInfo[3]
         toDoContainer.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16)
-
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
-
         toDoContainer.append(titleText, dueDateText, priorityText)
         projectContainer.append(toDoContainer)
-        document.body.append(projectContainer)
+        contentContainer.append(projectContainer)
     }
-
 }
 
 
@@ -87,7 +91,6 @@ the previous project with restaraunts
 
 
 
-/* so our current problem: can't access the projects list of to dos */
 
 
 

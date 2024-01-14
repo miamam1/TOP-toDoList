@@ -1,5 +1,5 @@
 import './style.css';
-import { navBar, sideBar } from './interface';
+import { navBar, sideBar, projectShowcase } from './interface';
 
 
 
@@ -76,6 +76,7 @@ add ability to edit/delete to dos and projects
 make sure DOM logic is seperate  */ 
 
 /* could add a fn in the project class to allow this */ 
+
 class Project {
     constructor(title) {
         this.title = title
@@ -126,9 +127,16 @@ sideBar(projects)
 projects[0].addNewtoDo("title", "dueDate", "priority", "Description")
 projects[0].addNewtoDo("title2", "dueDate2", "priority2", "Description2")
 projects[0].addNewtoDo("title3", "dueDate3", "priority3", "Description3")
+
+
+
+projects[1].addNewtoDo("titleB", "dueDateB", "priorityB", "DescriptionB")
+projects[1].addNewtoDo("titleB2", "dueDateB2", "priorityB2", "DescriptionB2")
+projects[1].addNewtoDo("titleB3", "dueDateB3", "priorityB3", "DescriptionB3")
 /* big brain, could use the method above for functions for DOM or smth */ 
 /* also check emails send myself an image */ 
 
+projectShowcase(projects, 0)
 
 
 export {
