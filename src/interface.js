@@ -1,4 +1,4 @@
-import { Project, toDo } from "./index"
+import { Project, newProject, toDo } from "./index"
 
 function navBar() {
     const navBar = document.createElement("div")
@@ -31,13 +31,47 @@ function sideBar(projects) {
         /* projects[i].addNewtoDo("a", "a2", "a3", "a4", "a5") */
         /* for some reason this works here but outside doesn't */
         button.classList.add("sideBarProject")
+        button.onclick = function () {
+            projectShowcase(projects, i)
+        }
         sideBarContainer.append(button)
         
     }
+    /* have stuff here for the buttons that has an onclick using the i, using the function below */
      document.body.append(sideBarContainer)
     
 
 }
+
+
+function projectShowcase(projects, index) {
+    const project = projects[index].gettoDos()
+    const projectContainer = document.createElement("div")
+    let toDoInfo
+    for(let i = 0; i < project.length; i++) {
+        toDoInfo = project[i].getInfo()
+        const toDoContainer = document.createElement("div")
+        const titleText = document.createElement("p")
+        titleText.textContent = toDoInfo[0]
+        const dueDateText = document.createElement("p")
+        dueDateText.textContent = toDoInfo[2]
+        const priorityText = document.createElement("p")
+        priorityText.textContent = toDoInfo[3]
+        toDoContainer.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16)
+
+        toDoContainer.classList.add("toDoContainer")
+        projectContainer.classList.add("projectContainer")
+
+        toDoContainer.append(titleText, dueDateText, priorityText)
+        projectContainer.append(toDoContainer)
+        document.body.append(projectContainer)
+    }
+
+}
+
+
+
+
 
 
 
@@ -51,19 +85,17 @@ the previous project with restaraunts
 
 
 
-function newProjectUI(name, projects) {
-    const project = new Project(name)
-    projects.push(project)
-    return 
-}
 
 
 /* so our current problem: can't access the projects list of to dos */
 
 
 
+
+
+
 export {
     navBar,
-    newProjectUI,
-    sideBar
+    sideBar, 
+    projectShowcase
 }

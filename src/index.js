@@ -1,5 +1,5 @@
 import './style.css';
-import { navBar, newProjectUI, sideBar } from './interface';
+import { navBar, sideBar } from './interface';
 
 
 
@@ -16,17 +16,16 @@ not to the point where i take months to finish the list */
 
 
 class toDo {
-    constructor(title, description, dueDate, priority, notes) {
+    constructor(title, dueDate, priority, description = " ") {
         this.title = title;
         this.description = description
         this.dueDate = dueDate
         this.priority = priority
-        this.notes = notes
         this.complete = "incomplete"
     }
     
     getInfo() {
-        return [this.title, this.description, this.dueDate, this.priority, this.notes, this.complete]
+        return [this.title, this.description, this.dueDate, this.priority, this.complete]
         
     }
 
@@ -49,6 +48,23 @@ class toDo {
         return this.priotity = newPriority
     }
 
+    changeTitle(newTitle) {
+        return this.title = newTitle
+
+    }
+
+    changeDescription(newDescription) {
+        return this.description = newDescription
+    }
+
+    changedueDate(newDueDate) {
+        return this.dueDate = newDueDate
+    }
+
+    
+
+    
+
 
 }
 
@@ -66,8 +82,8 @@ class Project {
         this.array = []
     }
     
-    addNewtoDo(title, description, dueDate, priority, notes) {
-        const newtoDo = new toDo(title, description, dueDate, priority, notes)
+    addNewtoDo(title, description, dueDate, priority) {
+        const newtoDo = new toDo(title, description, dueDate, priority)
         this.array.push(newtoDo)
     }
 
@@ -88,7 +104,11 @@ class Project {
 
 }
 
-
+function newProject(name, projects) {
+    const project = new Project(name)
+    projects.push(project)
+    return 
+}
 
 
 
@@ -99,23 +119,21 @@ navBar()
 /* doing this in interface causes an error. I don't know why but has to be something to do with initialization order with the project class*/
 
 
-newProjectUI("home", projects)
-newProjectUI("Today", projects)
-newProjectUI("A project", projects)
+newProject("home", projects)
+newProject("Today", projects)
+newProject("A project", projects)
 sideBar(projects)
-projects[0].addNewtoDo("kys1", "kys2", "kys3", "kys4", "kys5")
-projects[0].addNewtoDo("kys1", "kys2", "kys3", "kys4", "kys5")
-projects[0].addNewtoDo("kys1", "kys2", "kys3", "kys4", "kys5")
-console.log(projects[0].gettoDos())
+projects[0].addNewtoDo("title", "dueDate", "priority", "Description")
+projects[0].addNewtoDo("title2", "dueDate2", "priority2", "Description2")
+projects[0].addNewtoDo("title3", "dueDate3", "priority3", "Description3")
 /* big brain, could use the method above for functions for DOM or smth */ 
 /* also check emails send myself an image */ 
-const project2 = projects[0].gettoDos()
-project2[0].changetoComplete()
-console.log(projects[0])
-console.log(projects)
+
+
 
 export {
     toDo,
-    Project
+    Project,
+    newProject
 
 }
