@@ -108,12 +108,19 @@ button:focus  {
   display: flex;
   flex-direction: column;
   width: 10%;
-  
   height: 90vh;
   justify-content: space-around;
+}
+
+.sideBarProject {
+  border: none;
+  cursor: pointer;
   
 }
 
+.active {
+  background-color: red;
+}
 
 
 #contentContainer {

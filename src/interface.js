@@ -34,7 +34,17 @@ function sideBar(projects) {
         button.classList.add("sideBarProject")
         button.onclick = function () {
             projectShowcase(projects, i)
-            
+             const activebtns = document.getElementsByClassName("active")
+            console.log(activebtns.length)
+            if(activebtns.length == 0) {
+                button.classList.add("active")
+            } 
+            else {
+                for(let i = 0; i < activebtns.length; i++) {
+                    activebtns[0].classList.remove("active")
+                    button.classList.add("active")
+                }
+            } 
         }
         sideBarContainer.append(button)
         

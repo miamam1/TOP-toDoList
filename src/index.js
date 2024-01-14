@@ -136,7 +136,9 @@ projects[1].addNewtoDo("titleB3", "dueDateB3", "priorityB3", "DescriptionB3")
 /* big brain, could use the method above for functions for DOM or smth */ 
 /* also check emails send myself an image */ 
 
-projectShowcase(projects, 0)
+
+const home = document.getElementsByClassName("sideBarProject")
+home[0].click()
 
 
 export {
