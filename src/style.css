@@ -147,6 +147,23 @@ button:focus  {
   justify-content: space-between;
 }
 
+.highPriority, .mediumPriority, .lowPriority {
+  width: 10px;
+}
+
+.highPriority {
+  background-color: red;
+  
+}
+
+.mediumPriority {
+  background-color: orange;
+}
+
+.lowPriority {
+  background-color: green;
+}
+
 .detailsContainer {
   position: absolute;
   top: 50%;

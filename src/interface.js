@@ -33,9 +33,22 @@ function sideBar(projects) {
         /* for some reason this works here but outside doesn't */
         button.classList.add("sideBarProject")
         button.onclick = function () {
-            projectShowcase(projects, i)
-             const activebtns = document.getElementsByClassName("active")
+            const eraser = document.getElementsByClassName("projectContainer")
+            for(let i = 0; i < eraser.length; i++) {
+                eraser[0].parentNode.removeChild(eraser[0])
+            }
+            if(projects[i].title == "home" && projects[i].gettoDos().length == 0) {
+                const projectContainer = document.createElement("div")
+                projectContainer.classList.add("projectContainer")
+                projectContainer.textContent = "I'm empty :( Fill me up with some to dos!"
+                contentContainer.append(projectContainer)
+            } else {
+                projectShowcase(projects, i)
+                
+            }
+            const activebtns = document.getElementsByClassName("active")
             console.log(activebtns.length)
+
             if(activebtns.length == 0) {
                 button.classList.add("active")
             } 
@@ -57,12 +70,27 @@ function sideBar(projects) {
 
 
 function projectShowcase(projects, index) {
-    const eraser = document.getElementsByClassName("projectContainer")
-    for(let i = 0; i < eraser.length; i++) {
-        eraser[0].parentNode.removeChild(eraser[0])
-    }
     const contentContainer = document.getElementById("contentContainer")
     const project = projects[index].gettoDos()
+    
+
+    if(project.length == 0) {
+        const projectContainer = document.createElement("div")
+        projectContainer.classList.add("projectContainer")
+        projectContainer.textContent = "I'm empty. Delete me. Or add stuff to me maybe :)"
+        const deleteMe = document.createElement("button")
+        deleteMe.textContent = "Delete"
+        deleteMe.onclick = () => {
+            projects.splice(index, 1)
+            const eraser = document.getElementsByClassName("sideBarContainer")
+            eraser[0].remove()
+            projectContainer.remove()
+            sideBar(projects)
+        }
+        projectContainer.append(deleteMe)
+        contentContainer.append(projectContainer)
+        return
+    }
     const projectContainer = document.createElement("div")
     let toDoInfo
     for(let i = 0; i < project.length; i++) {
@@ -72,17 +100,27 @@ function projectShowcase(projects, index) {
         titleText.textContent = toDoInfo[0]
         const dueDateText = document.createElement("p")
         dueDateText.textContent = toDoInfo[2]
-        const priorityText = document.createElement("p")
-        priorityText.textContent = toDoInfo[3]
+        const priorityContainer = document.createElement("div")
+        
+        if(toDoInfo[3] == "high") {
+            priorityContainer.classList.add("highPriority")
+        } else if(toDoInfo[3] == "medium") {
+            priorityContainer.classList.add("mediumPriority")
+        } else if(toDoInfo[3] == "low") {
+            priorityContainer.classList.add("lowPriority")
+        }
+        
         const detailsBTN = document.createElement("button")
         detailsBTN.textContent = "Details"
         detailsBTN.onclick = () => {
+            
 
             /* bugs:
-            only showcases whatever the last to do is, even when that last to do has been deleted.
-            easy one to fix - when pressed multiple times will create multiple containers that stack up on eachother */
-
-            console.log(i)
+            easy one to fix - when pressed multiple times will create multiple containers that stack up on eachother;
+            do this, kinda how thetop answer makes it so you cant click anything apart from the exit button:
+            https://stackoverflow.com/questions/6564171/get-all-the-button-tag-types, loop through this, give them a class which does pointer-events: none,
+            maybe take on away to account for the exit button which should be at the end of the list you get because you just clicked the button, maybe */
+            toDoInfo = project[i].getInfo()
             const titleText = document.createElement("p")
             titleText.textContent = toDoInfo[0]
 
@@ -109,20 +147,21 @@ function projectShowcase(projects, index) {
             }
             detailsContainer.append(titleText, dueDateText, priorityText, descriptionText, completeText, exitButton)
             contentContainer.append(detailsContainer)
-            console.log("lol")
+            
         }
         const deleteBTN = document.createElement("button")
         deleteBTN.textContent = "delete"
         deleteBTN.onclick = () => {
             projects[index].deletetoDo(i)
-            
             toDoContainer.remove()
+            projectContainer.remove()
+            projectShowcase(projects, index)
 
         }
         toDoContainer.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16)
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
-        toDoContainer.append(titleText, dueDateText, priorityText, deleteBTN, detailsBTN)
+        toDoContainer.append(priorityContainer, titleText, dueDateText, deleteBTN, detailsBTN)
         projectContainer.append(toDoContainer)
         contentContainer.append(projectContainer)
     }
