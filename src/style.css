@@ -110,21 +110,46 @@ button:focus  {
   width: 10%;
   height: 90vh;
   justify-content: space-around;
+  align-items: center;
 }
 
 .sideBarProject {
-  border: none;
+  background-color: white;
+  background-color: none;
+  border: 2px solid black;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  height: 100px;
   
 }
 
-.active {
-  background-color: red;
+.active  {
+  border-color: #06f
 }
 
 
 #contentContainer {
   display: flex;
   gap: 250px;
+  
+}
+.projectContainer {
+  margin: 85px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
+.toDoContainer {
+  display: flex;
+  width: 1000px;
+  justify-content: space-between;
+}
+
+.detailsContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+}

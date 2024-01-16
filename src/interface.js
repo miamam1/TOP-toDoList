@@ -74,10 +74,55 @@ function projectShowcase(projects, index) {
         dueDateText.textContent = toDoInfo[2]
         const priorityText = document.createElement("p")
         priorityText.textContent = toDoInfo[3]
+        const detailsBTN = document.createElement("button")
+        detailsBTN.textContent = "Details"
+        detailsBTN.onclick = () => {
+
+            /* bugs:
+            only showcases whatever the last to do is, even when that last to do has been deleted.
+            easy one to fix - when pressed multiple times will create multiple containers that stack up on eachother */
+
+            console.log(i)
+            const titleText = document.createElement("p")
+            titleText.textContent = toDoInfo[0]
+
+            const dueDateText = document.createElement("p")
+            dueDateText.textContent = toDoInfo[2]
+
+            const priorityText = document.createElement("p")
+            priorityText.textContent = toDoInfo[3]
+
+            const detailsContainer = document.createElement("div")
+
+            const descriptionText = document.createElement("p")
+            descriptionText.textContent = toDoInfo[1]
+
+            const completeText = document.createElement("p")
+            completeText.textContent = toDoInfo[4]
+
+            detailsContainer.classList.add("detailsContainer")
+            
+            const exitButton = document.createElement("button")
+            exitButton.textContent = "Exit"
+            exitButton.onclick = () => {
+                detailsContainer.remove()
+            }
+            detailsContainer.append(titleText, dueDateText, priorityText, descriptionText, completeText, exitButton)
+            contentContainer.append(detailsContainer)
+            console.log("lol")
+        }
+        const deleteBTN = document.createElement("button")
+        deleteBTN.textContent = "delete"
+        deleteBTN.onclick = () => {
+            projects[index].deletetoDo(i)
+            
+            toDoContainer.remove()
+
+        }
         toDoContainer.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16)
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
-        toDoContainer.append(titleText, dueDateText, priorityText)
+        toDoContainer.append(titleText, dueDateText, priorityText, deleteBTN, detailsBTN)
         projectContainer.append(toDoContainer)
         contentContainer.append(projectContainer)
     }
