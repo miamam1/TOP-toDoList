@@ -115,7 +115,7 @@ function newProject(name, projects) {
 
 let projects = []
 
-navBar()
+navBar(projects)
 
 /* doing this in interface causes an error. I don't know why but has to be something to do with initialization order with the project class*/
 

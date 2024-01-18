@@ -1,10 +1,75 @@
 import { Project, newProject, toDo } from "./index"
 
-function navBar() {
+function navBar(projects) {
     const navBar = document.createElement("div")
     const title = document.createElement("h1")
     const newtoDoBTN = document.createElement("button")
+    newtoDoBTN.onclick = () => {
+        toDoForm.style.display = "block"
+        
+    }
+
     const newProjectBTN = document.createElement("button")
+
+    const toDoForm= document.createElement("form")
+    const inputTitle = document.createElement("input")
+    inputTitle.type = 'text'
+    inputTitle.name = 'title'
+    inputTitle.placeholder = 'Title...'
+    const inputDescription = document.createElement("input")
+    inputDescription.type = 'text'
+    inputDescription.name = 'description'
+    inputDescription.placeholder = 'Description...'
+    const inputDate = document.createElement("input")
+    inputDate.type = 'date'
+    inputDate.name = 'inputDate'
+    const radioBTN1 = document.createElement("input")
+    radioBTN1.type = 'radio'
+    radioBTN1.value = 'low'
+    radioBTN1.name = "priorityINPUT"
+    const radioBTN2 = document.createElement("input")
+    radioBTN2.type = 'radio'
+    radioBTN2.value = 'medium'
+    radioBTN2.name = "priorityINPUT"
+    const radioBTN3 = document.createElement("input")
+    radioBTN3.type = 'radio'
+    radioBTN3.value = 'high'
+    radioBTN3.name = "priorityINPUT"
+
+    const submittoDo = document.createElement("input")
+    submittoDo.type = 'button'
+    submittoDo.value = 'Submit'
+    const checker = document.getElementsByClassName("sideBarProject")
+    submittoDo.onclick = (event) => {
+        let index;
+        for(let i = 0; i < checker.length; i++) {
+            if(checker[i].classList.contains("active")) {
+                index = i
+                break
+            }
+        }
+
+        const checkedBox = document.querySelector('input[name="priorityINPUT"]:checked').value
+        projects[index].addNewtoDo(inputTitle.value, inputDate.value, checkedBox, inputDescription.value)
+        console.log(projects[index])
+        toDoForm.style.display = "none"
+        inputTitle.value = ""
+        inputDescription.value = ""
+        inputDate.value = ""
+        projectShowcase(projects, index)
+        event.preventDefault()
+         }
+
+    const closeForm = document.createElement("button")
+    closeForm.textContent = "Close"
+    closeForm.onclick = (event) => {
+        toDoForm.style.display = "none"
+        event.preventDefault()
+    }
+    toDoForm.append(inputTitle, inputDescription, inputDate, radioBTN1, radioBTN2, radioBTN3, submittoDo, closeForm)
+    document.body.append(toDoForm)
+    toDoForm.style.display = "none"
+
     const buttonContainer = document.createElement("div")
     navBar.classList.add("navbar")
     title.classList.add("title")
@@ -33,31 +98,21 @@ function sideBar(projects) {
         /* for some reason this works here but outside doesn't */
         button.classList.add("sideBarProject")
         button.onclick = function () {
-            const eraser = document.getElementsByClassName("projectContainer")
-            for(let i = 0; i < eraser.length; i++) {
-                eraser[0].parentNode.removeChild(eraser[0])
-            }
-            if(projects[i].title == "home" && projects[i].gettoDos().length == 0) {
-                const projectContainer = document.createElement("div")
-                projectContainer.classList.add("projectContainer")
-                projectContainer.textContent = "I'm empty :( Fill me up with some to dos!"
-                contentContainer.append(projectContainer)
-            } else {
                 projectShowcase(projects, i)
                 
-            }
-            const activebtns = document.getElementsByClassName("active")
-            console.log(activebtns.length)
+            
+                const activebtns = document.getElementsByClassName("active")
+                console.log(activebtns.length)
 
-            if(activebtns.length == 0) {
-                button.classList.add("active")
-            } 
-            else {
-                for(let i = 0; i < activebtns.length; i++) {
-                    activebtns[0].classList.remove("active")
+                if(activebtns.length == 0) {
                     button.classList.add("active")
-                }
-            } 
+                } 
+                else {
+                    for(let i = 0; i < activebtns.length; i++) {
+                        activebtns[0].classList.remove("active")
+                        button.classList.add("active")
+                    }
+                } 
         }
         sideBarContainer.append(button)
         
@@ -70,10 +125,21 @@ function sideBar(projects) {
 
 
 function projectShowcase(projects, index) {
+    const eraser = document.getElementsByClassName("projectContainer")
+            for(let i = 0; i < eraser.length; i++) {
+                eraser[0].parentNode.removeChild(eraser[0])
+            }
     const contentContainer = document.getElementById("contentContainer")
     const project = projects[index].gettoDos()
     
-
+    if(project.length == 0 && projects[index].title == "home") {
+        const projectContainer = document.createElement("div")
+        projectContainer.classList.add("projectContainer")
+        projectContainer.textContent = "I'm empty :( Fill me up with some to dos!"
+        contentContainer.append(projectContainer)
+        return 
+        
+    }
     if(project.length == 0) {
         const projectContainer = document.createElement("div")
         projectContainer.classList.add("projectContainer")
@@ -113,8 +179,6 @@ function projectShowcase(projects, index) {
         const detailsBTN = document.createElement("button")
         detailsBTN.textContent = "Details"
         detailsBTN.onclick = () => {
-            
-
             /* bugs:
             easy one to fix - when pressed multiple times will create multiple containers that stack up on eachother;
             do this, kinda how thetop answer makes it so you cant click anything apart from the exit button:
