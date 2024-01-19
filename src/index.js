@@ -123,6 +123,7 @@ navBar(projects)
 newProject("home", projects)
 newProject("Today", projects)
 newProject("A project", projects)
+
 sideBar(projects)
 
 

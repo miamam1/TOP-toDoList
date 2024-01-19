@@ -138,7 +138,13 @@ function sideBar(projects) {
 
     
     const contentContainer = document.getElementById("contentContainer")
+    const itemsContainer = document.createElement("div")
     const sideBarContainer = document.createElement("div")
+    const projectText = document.createElement("h1")
+    projectText.textContent = "Projects"
+    sideBarContainer.append(projectText)
+    projectText.classList.add("projectText")
+    itemsContainer.classList.add("itemsContainer")
     sideBarContainer.classList.add("sideBarContainer")
     for(let i = 0; i < projects.length; i++) {
         const button = document.createElement("button")
@@ -149,9 +155,12 @@ function sideBar(projects) {
         button.onclick = function () {
                 projectShowcase(projects, i)
         }
-        sideBarContainer.append(button)
+        itemsContainer.append(button)
         
     }
+
+    sideBarContainer.append(itemsContainer)
+    
     /* have stuff here for the buttons that has an onclick using the i, using the function below */
      contentContainer.append(sideBarContainer)
     
@@ -194,6 +203,7 @@ function projectShowcase(projects, index) {
             eraser[0].remove()
             projectContainer.remove()
             sideBar(projects)
+            projectShowcase(projects, 0)
         }
         projectContainer.append(deleteMe)
         contentContainer.append(projectContainer)
@@ -264,7 +274,7 @@ function projectShowcase(projects, index) {
             projectShowcase(projects, index)
 
         }
-        toDoContainer.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16)
+        /*toDoContainer.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16) */
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
         toDoContainer.append(priorityContainer, titleText, dueDateText, deleteBTN, detailsBTN)

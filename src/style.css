@@ -21,11 +21,16 @@ body {
     flex-direction: column-reverse;
 }
 
+html, body{
+  height: 100%;
+}
+
 .navbar { 
     display: flex;
     justify-content: space-evenly;
     border-bottom: 2.3px solid black;
     align-items: center;
+    
 }
 
 .navbar button {
@@ -104,38 +109,51 @@ button:focus  {
 
 
 .sideBarContainer {
-  /* yeah this is annoying and gay */
   display: flex;
   flex-direction: column;
-  width: 10%;
-  height: 90vh;
-  justify-content: space-around;
+  border: 2.3px solid black;
   align-items: center;
+  justify-content: space-around;
+  flex-basis: 10%;
+  margin: 20px;
+}
+
+.itemsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+ 
+}
+.projectText {
+   border-bottom: 2px dotted black;
 }
 
 .sideBarProject {
   background-color: white;
-  background-color: none;
-  border: 2px solid black;
+  border: none;
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
-  height: 100px;
+  
+  
   
 }
 
 .active  {
-  border-color: #06f
+  border-bottom: 2px dotted #06f;
 }
 
 
 #contentContainer {
   display: flex;
-  gap: 250px;
+  flex: 1;
   
 }
 .projectContainer {
-  margin: 85px;
+  margin: 100px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -143,7 +161,7 @@ button:focus  {
 
 .toDoContainer {
   display: flex;
-  width: 1000px;
+  border: 2px solid black;
   justify-content: space-between;
 }
 
