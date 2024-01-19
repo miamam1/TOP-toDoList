@@ -128,7 +128,7 @@ function navBar(projects) {
 }
 
 
-/* have a list of projects that gets added to everytime a new project is made */
+
 
 function sideBar(projects) {
     const eraser = document.getElementsByClassName("sideBarContainer")
@@ -149,8 +149,6 @@ function sideBar(projects) {
     for(let i = 0; i < projects.length; i++) {
         const button = document.createElement("button")
         button.textContent = projects[i].title
-        /* projects[i].addNewtoDo("a", "a2", "a3", "a4", "a5") */
-        /* for some reason this works here but outside doesn't */
         button.classList.add("sideBarProject")
         button.onclick = function () {
                 projectShowcase(projects, i)
@@ -161,7 +159,7 @@ function sideBar(projects) {
 
     sideBarContainer.append(itemsContainer)
     
-    /* have stuff here for the buttons that has an onclick using the i, using the function below */
+    
      contentContainer.append(sideBarContainer)
     
 
@@ -169,8 +167,6 @@ function sideBar(projects) {
 
 
 function projectShowcase(projects, index) {
-    /* put the activebtns logic in here cus when adding a new project it doesnt activate properly */
-    /* remove all instances of active for all buttons, then using the index parameter add active btn class to the project being showcased */
     const buttons = document.getElementsByClassName("sideBarProject")
     for(let i = 0; i < buttons.length; i++) {
         buttons[i].classList.remove("active")
@@ -197,6 +193,7 @@ function projectShowcase(projects, index) {
         projectContainer.textContent = "I'm empty. Delete me. Or add stuff to me maybe :)"
         const deleteMe = document.createElement("button")
         deleteMe.textContent = "Delete"
+        deleteMe.style.width = "50px"
         deleteMe.onclick = () => {
             projects.splice(index, 1)
             const eraser = document.getElementsByClassName("sideBarContainer")
@@ -261,6 +258,10 @@ function projectShowcase(projects, index) {
             exitButton.onclick = () => {
                 detailsContainer.remove()
             }
+
+
+
+
             detailsContainer.append(titleText, dueDateText, priorityText, descriptionText, completeText, exitButton)
             contentContainer.append(detailsContainer)
             
@@ -274,10 +275,17 @@ function projectShowcase(projects, index) {
             projectShowcase(projects, index)
 
         }
-        /*toDoContainer.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16) */
+        const editBTN = document.createElement("button")
+        editBTN.textContent = "Edit" 
+        editBTN.onclick = () => {
+            /* make edit form try to mayhbe reuse code from other forms idk
+            use the class functions for to dos in index remember CRUD n stuff no use DOM for data only view */ 
+        }
+
+       
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
-        toDoContainer.append(priorityContainer, titleText, dueDateText, deleteBTN, detailsBTN)
+        toDoContainer.append(priorityContainer, titleText, dueDateText, deleteBTN, detailsBTN, editBTN)
         projectContainer.append(toDoContainer)
         contentContainer.append(projectContainer)
     }
@@ -289,13 +297,6 @@ function projectShowcase(projects, index) {
 
 
 
-/* Ok got way to show  implment classes into different file
-Idea: need a function that can make a new project, and also display it in DOM. Kinda like the most upvoted solution 
-Newer Idea: have these as seperate functions idiot, also make it so the display in DOM is based off of whatever sidebar button is active, kinda like
-the previous project with restaraunts 
-*/ 
-
-/* project inerface should just take name, add add it to the sidebar */ 
 
 
 
