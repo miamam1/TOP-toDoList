@@ -60,12 +60,16 @@ function navBar(projects) {
         event.preventDefault()
          }
 
-    const closeForm = document.createElement("button")
-    closeForm.textContent = "Close"
-    closeForm.onclick = (event) => {
-        toDoForm.style.display = "none"
-        event.preventDefault()
-    }
+        const closeForm = document.createElement("button")
+        closeForm.textContent = "Close"
+        closeForm.onclick = (event) => {
+            toDoForm.style.display = "none"
+             toDoForm.style.display = "none"
+            inputTitle.value = ""
+            inputDescription.value = ""
+            inputDate.value = ""
+            event.preventDefault()
+        }
     toDoForm.append(inputTitle, inputDescription, inputDate, radioBTN1, radioBTN2, radioBTN3, submittoDo, closeForm)
     document.body.append(toDoForm)
     toDoForm.style.display = "none"
@@ -79,6 +83,45 @@ function navBar(projects) {
     title.textContent = "toDo List"
     newtoDoBTN.textContent = "New To do"
     newProjectBTN.textContent = "New Project"
+
+    newProjectBTN.onclick = () => {
+        newProjectForm.style.display = "block"
+        
+         
+    }
+
+    const newProjectForm = document.createElement("form")
+    const inputProjectTitle = document.createElement("input")
+    inputProjectTitle.type = "text"
+    inputProjectTitle.value = ""
+    inputProjectTitle.title = "title"
+    inputProjectTitle.placeholder = "Project title..."
+    const closeBTN = document.createElement("button")
+    closeBTN.textContent = "Close"
+    closeBTN.onclick = (event) => {
+        newProjectForm.style.display = "none"
+        inputProjectTitle.value = ""
+        event.preventDefault()
+    }
+    const submitBTN = document.createElement("input")
+    submitBTN.type = "button"
+    submitBTN.value = "Submit"
+    submitBTN.onclick = (event) => {
+        newProject(inputProjectTitle.value, projects)
+        newProjectForm.style.display = "none"
+        let x = projects.length - 1
+        console.log(x)
+        sideBar(projects)
+        projectShowcase(projects, x)
+        inputProjectTitle.value = ""
+        event.preventDefault()
+    }
+
+    newProjectForm.append(inputProjectTitle, closeBTN, submitBTN)
+    newProjectForm.style.display = "none"
+    document.body.append(newProjectForm)
+
+
     buttonContainer.append(newtoDoBTN, newProjectBTN)
     navBar.append(title, buttonContainer)
     document.body.append(navBar)
@@ -88,6 +131,12 @@ function navBar(projects) {
 /* have a list of projects that gets added to everytime a new project is made */
 
 function sideBar(projects) {
+    const eraser = document.getElementsByClassName("sideBarContainer")
+            for(let i = 0; i < eraser.length; i++) {
+                eraser[0].parentNode.removeChild(eraser[0])
+            }
+
+    
     const contentContainer = document.getElementById("contentContainer")
     const sideBarContainer = document.createElement("div")
     sideBarContainer.classList.add("sideBarContainer")
@@ -99,20 +148,6 @@ function sideBar(projects) {
         button.classList.add("sideBarProject")
         button.onclick = function () {
                 projectShowcase(projects, i)
-                
-            
-                const activebtns = document.getElementsByClassName("active")
-                console.log(activebtns.length)
-
-                if(activebtns.length == 0) {
-                    button.classList.add("active")
-                } 
-                else {
-                    for(let i = 0; i < activebtns.length; i++) {
-                        activebtns[0].classList.remove("active")
-                        button.classList.add("active")
-                    }
-                } 
         }
         sideBarContainer.append(button)
         
@@ -125,6 +160,13 @@ function sideBar(projects) {
 
 
 function projectShowcase(projects, index) {
+    /* put the activebtns logic in here cus when adding a new project it doesnt activate properly */
+    /* remove all instances of active for all buttons, then using the index parameter add active btn class to the project being showcased */
+    const buttons = document.getElementsByClassName("sideBarProject")
+    for(let i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active")
+    }
+    buttons[index].classList.add("active")
     const eraser = document.getElementsByClassName("projectContainer")
             for(let i = 0; i < eraser.length; i++) {
                 eraser[0].parentNode.removeChild(eraser[0])
