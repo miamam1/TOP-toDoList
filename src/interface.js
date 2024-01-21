@@ -10,7 +10,6 @@ function navBar(projects) {
     }
 
     const newProjectBTN = document.createElement("button")
-
     const toDoForm= document.createElement("form")
     const inputTitle = document.createElement("input")
     inputTitle.type = 'text'
@@ -276,13 +275,86 @@ function projectShowcase(projects, index) {
 
         }
         const editBTN = document.createElement("button")
-        editBTN.textContent = "Edit" 
-        editBTN.onclick = () => {
-            /* make edit form try to mayhbe reuse code from other forms idk
-            use the class functions for to dos in index remember CRUD n stuff no use DOM for data only view */ 
-        }
+        editBTN.textContent = "Edit"
+        
 
+
+        const gettoDos = projects[index].gettoDos()
+        const gettoDo = gettoDos[i]
+        const gettoDoInfo = gettoDos[i].getInfo()
+        const edittoDoForm = document.createElement("form")
+        const inputTitle = document.createElement("input")
+        inputTitle.type = 'text'
+        inputTitle.name = 'title'
+        inputTitle.placeholder = "Title..."
+        inputTitle.value = gettoDoInfo[0]
+        const inputDescription = document.createElement("input")
+        inputDescription.type = 'text'
+        inputDescription.name = 'description'
+        inputDescription.value = gettoDoInfo[1]
+        inputDescription.placeholder = 'Description...'
+        const inputDate = document.createElement("input")
+        inputDate.type = 'date'
+        inputDate.value = gettoDoInfo[2]
+        inputDate.name = 'inputDate'
+        const radioBTN1 = document.createElement("input")
+        radioBTN1.type = 'radio'
+        radioBTN1.value = 'low'
+        radioBTN1.name = "priorityINPUT2"
+        const radioBTN2 = document.createElement("input")
+        radioBTN2.type = 'radio'
+        radioBTN2.value = 'medium'
+        radioBTN2.name = "priorityINPUT2"
+        const radioBTN3 = document.createElement("input")
+        radioBTN3.type = 'radio'
+        radioBTN3.value = 'high'
+        radioBTN3.name = "priorityINPUT2"
+        /* Two problems:
+            - checkedBox only returns the default value when the form pops up e.g. if your form pruiority was low and you change it to high it will reutrn low still
+            - Color doesnt change even if it isnt high already, problem with projectShowcase color logic 
+        */ 
+        let checkedBox
+        if(gettoDoInfo[3] == "low") {
+            radioBTN1.checked = true
+            checkedBox = "low"
+        } else if(gettoDoInfo[3] == "medium") {
+            radioBTN2.checked = true
+            checkedBox = "medium"
+        } else if(gettoDoInfo[3] == "high") {
+            radioBTN3.checked = true
+            checkedBox = "high"
+        }
+        /* probably better to put this outside of the for loop cus rn i think every possible todo has its own
+        form/view details which isprobably bad for performance */
+
+        const submitBTN = document.createElement("input")
+        submitBTN.type = 'button'
+        submitBTN.value = 'Edit'
+        submitBTN.onclick = (event) => {
+            console.log(checkedBox)
+            console.log(gettoDoInfo[3])
+            gettoDo.changeTitle(inputTitle.value)
+            gettoDo.changeDescription(inputDescription.value)
+            gettoDo.changedueDate(inputDate.value)
+            gettoDo.changePriority(checkedBox)
+            edittoDoForm.style.display = "none"
+            projectShowcase(projects, index)
+        }
+        const closeBTN = document.createElement("button")
+        closeBTN.textContent = "Close"
+        closeBTN.onclick = (event) => {
+            edittoDoForm.style.display = "none"
+            event.preventDefault()
+        }
        
+        editBTN.onclick = () => {
+            edittoDoForm.style.display = "block"
+           
+        }
+        edittoDoForm.append(inputTitle, inputDescription, inputDate, radioBTN1, radioBTN2, radioBTN3, submitBTN, closeBTN)
+        document.body.append(edittoDoForm)
+        edittoDoForm.style.display = "none"
+
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
         toDoContainer.append(priorityContainer, titleText, dueDateText, deleteBTN, detailsBTN, editBTN)
