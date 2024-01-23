@@ -1,4 +1,6 @@
 import { Project, newProject, toDo } from "./index"
+import bin from "./delete-outline.svg"
+import edit from "./file-edit-outline.svg"
 
 function navBar(projects) {
     const navBar = document.createElement("div")
@@ -227,6 +229,10 @@ function projectShowcase(projects, index) {
         
         const detailsBTN = document.createElement("button")
         detailsBTN.textContent = "Details"
+        /* oh my fucking god just check library retard already did this */ 
+        /*detailsBTN.style.cssText = `background-image:url(${binIMG})` */
+        detailsBTN.classList.add("detailsBTN")
+        
         detailsBTN.onclick = () => {
             /* bugs:
             easy one to fix - when pressed multiple times will create multiple containers that stack up on eachother;
@@ -266,8 +272,15 @@ function projectShowcase(projects, index) {
             contentContainer.append(detailsContainer)
             
         }
+
+
+        
+        const binImage = document.createElement("img")
+        binImage.src = bin
         const deleteBTN = document.createElement("button")
-        deleteBTN.textContent = "delete"
+        deleteBTN.classList.add("deleteBTN")
+        deleteBTN.append(binImage)
+
         deleteBTN.onclick = () => {
             projects[index].deletetoDo(i)
             toDoContainer.remove()
@@ -275,8 +288,7 @@ function projectShowcase(projects, index) {
             projectShowcase(projects, index)
 
         }
-        const editBTN = document.createElement("button")
-        editBTN.textContent = "Edit"
+        
         
 
 
@@ -290,9 +302,12 @@ function projectShowcase(projects, index) {
         form/view details which isprobably bad for performance */
         
         
+        const editBTN = document.createElement("button")
+        const editImage = document.createElement("img")
+        editImage.src = edit
+        editBTN.classList.add("editBTN")
+        editBTN.append(editImage)
         
-        
-       
         editBTN.onclick = () => {
             const gettoDos = projects[index].gettoDos()
             const gettoDo = gettoDos[i]
@@ -324,7 +339,7 @@ function projectShowcase(projects, index) {
             radioBTN3.type = 'radio'
             radioBTN3.value = 'high'
             radioBTN3.name = "priorityINPUT2"
-            /* if(gettoDoInfo[3] === "low") {
+             if(gettoDoInfo[3] === "low") {
                 radioBTN1.defaultChecked = true
                 
             } else if(gettoDoInfo[3] === "medium") {
@@ -333,7 +348,7 @@ function projectShowcase(projects, index) {
             } else if(gettoDoInfo[3] === "high") {
                 radioBTN3.defaultChecked = true
                 
-            } */ 
+            } 
             const submitBTN = document.createElement("input")
             submitBTN.type = 'button'
             submitBTN.value = 'Edit'
@@ -357,11 +372,18 @@ function projectShowcase(projects, index) {
            
         }
         
+        const completeBTN = document.createElement("button")
+        completeBTN.classList.add("completeBTN")
+        
+        /* needs to read from complete, think about local browser storage, a to do is completed but when you reload it is uncompleted, so it needs to be read
+            for ui probably just do the top answer but wihtout tick, filled black = complete, white but black border = not complete, obv with transparency and crossed line 
+        */
+
         
 
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
-        toDoContainer.append(priorityContainer, titleText, dueDateText, deleteBTN, detailsBTN, editBTN)
+        toDoContainer.append(priorityContainer, completeBTN, titleText, detailsBTN, dueDateText, editBTN, deleteBTN)
         projectContainer.append(toDoContainer)
         contentContainer.append(projectContainer)
     }

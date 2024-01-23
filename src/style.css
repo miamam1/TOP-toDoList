@@ -175,14 +175,29 @@ button:focus  {
   background-color: red;
   
 }
-
 .mediumPriority {
   background-color: orange;
 }
-
 .lowPriority {
   background-color: green;
 }
+
+
+.detailsBTN, .deleteBTN, .editBTN {
+  
+  border: none;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+}
+
+.detailsBTN img,  .deleteBTN img, .editBTN img {
+  width: 20px;
+}
+
+
+
+
 
 .detailsContainer {
   position: absolute;

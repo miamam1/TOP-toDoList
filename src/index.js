@@ -111,9 +111,9 @@ sideBar(projects)
 
 
 
-projects[1].addNewtoDo("titleB", "dueDateB", "high", "DescriptionB")
-projects[1].addNewtoDo("titleB2", "dueDateB2", "medium", "DescriptionB2")
-projects[1].addNewtoDo("titleB3", "dueDateB3", "low", "DescriptionB3")
+projects[0].addNewtoDo("titleB", "dueDateB", "high", "DescriptionB")
+projects[0].addNewtoDo("titleB2", "dueDateB2", "medium", "DescriptionB2")
+projects[0].addNewtoDo("titleB3", "dueDateB3", "low", "DescriptionB3")
 
 
 const home = document.getElementsByClassName("sideBarProject")
