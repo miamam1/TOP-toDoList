@@ -27,7 +27,7 @@ class toDo {
     }
 
     changePriority(newPriority) {
-        return this.priotity = newPriority
+        return this.priority = newPriority
     }
 
     changeTitle(newTitle) {
