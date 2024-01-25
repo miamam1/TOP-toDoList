@@ -245,35 +245,50 @@ function projectShowcase(projects, index) {
             maybe take on away to account for the exit button which should be at the end of the list you get because you just clicked the button, maybe */
             toDoInfo = project[i].getInfo()
             const titleText = document.createElement("p")
-            titleText.textContent = toDoInfo[0]
+            titleText.textContent = "Title: " + toDoInfo[0]
 
             const dueDateText = document.createElement("p")
-            dueDateText.textContent = toDoInfo[2]
+            dueDateText.textContent = "Due date: " + toDoInfo[2]
 
             const priorityText = document.createElement("p")
-            priorityText.textContent = toDoInfo[3]
+            priorityText.textContent = "Priority: " + toDoInfo[3]
 
             const detailsContainer = document.createElement("div")
 
             const descriptionText = document.createElement("p")
-            descriptionText.textContent = toDoInfo[1]
+            descriptionText.textContent = "Description: " + toDoInfo[1]
 
             const completeText = document.createElement("p")
-            completeText.textContent = toDoInfo[4]
+            completeText.textContent = "Status: " + toDoInfo[4]
 
             detailsContainer.classList.add("detailsContainer")
-            
+
+            contentContainer.style.filter = "blur(4px)"
+            contentContainer.style.pointerEvents = "none"
+            contentContainer.style.userSelect = "none"
+            const navBar = document.getElementsByClassName("navbar")
+            navBar[0].style.filter = "blur(4px)"
+            navBar[0].style.pointerEvents = "none"
+            navBar[0].style.userSelect = "none"
             const exitButton = document.createElement("button")
             exitButton.textContent = "Exit"
+
+
             exitButton.onclick = () => {
+                contentContainer.style.filter = "blur(0)"
+                contentContainer.style.pointerEvents = "auto"
+                contentContainer.style.userSelect = "auto"
+                navBar[0].style.filter = "blur(0)"
+                navBar[0].style.pointerEvents = "auto"
+                navBar[0].style.userSelect = "auto"
                 detailsContainer.remove()
             }
 
 
 
 
-            detailsContainer.append(titleText, dueDateText, priorityText, descriptionText, completeText, exitButton)
-            contentContainer.append(detailsContainer)
+            detailsContainer.append(titleText, dueDateText, priorityText, completeText, descriptionText, exitButton)
+            document.body.append(detailsContainer)
             
         }
 
