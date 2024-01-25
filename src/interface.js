@@ -373,7 +373,29 @@ function projectShowcase(projects, index) {
         }
         
         const completeBTN = document.createElement("button")
-        completeBTN.classList.add("completeBTN")
+        
+        const gettoDos = projects[index].gettoDos()
+        const gettoDoInfo = gettoDos[i].getInfo()
+        const getComplete = gettoDoInfo[4]
+        completeBTN.onclick = () => {
+            const gettoDos = projects[index].gettoDos()
+            const gettoDo = gettoDos[i]
+            const gettoDoInfo = gettoDos[i].getInfo()
+            const getComplete = gettoDoInfo[4]
+            if(getComplete == "complete") {
+                gettoDo.changetoinComplete()
+                completeBTN.classList.remove("complete")
+                completeBTN.classList.add("incomplete")
+                
+            } else {
+                gettoDo.changetoComplete()
+                completeBTN.classList.remove("incomplete")
+                completeBTN.classList.add("complete")
+                
+            } 
+        }
+        completeBTN.classList.add(getComplete, "completeBTN")
+        
         
         /* needs to read from complete, think about local browser storage, a to do is completed but when you reload it is uncompleted, so it needs to be read
             for ui probably just do the top answer but wihtout tick, filled black = complete, white but black border = not complete, obv with transparency and crossed line 

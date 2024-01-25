@@ -197,6 +197,22 @@ button:focus  {
 
 
 
+.completeBTN {
+  border: 2.3px solid black;
+  margin: 10px;
+  
+}
+
+.incomplete {
+  background: none;
+}
+
+.complete {
+  background-color: black;
+}
+
+
+
 
 
 .detailsContainer {
