@@ -180,7 +180,7 @@ button:focus  {
 
 .flexContainer2 {
   display: flex;
-  gap: 15px;
+  gap: 30px;
 }
 
 .highPriority, .mediumPriority, .lowPriority {
