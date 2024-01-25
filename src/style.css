@@ -161,14 +161,17 @@ button:focus  {
   gap: 10px;
 }
 
+/* toDoContainer */
 .toDoContainer {
-  display: flex;
   border: 2px solid black;
-  justify-content: space-between;
+  display: flex;
+  gap: 10px;
+  
 }
 
 .highPriority, .mediumPriority, .lowPriority {
   width: 10px;
+  
 }
 
 .highPriority {
@@ -183,25 +186,37 @@ button:focus  {
 }
 
 
-.detailsBTN, .deleteBTN, .editBTN {
-  
+ .deleteBTN, .editBTN {
   border: none;
   cursor: pointer;
-  width: 10px;
-  height: 10px;
-}
-
-.detailsBTN img,  .deleteBTN img, .editBTN img {
-  width: 20px;
+  width: 40px;
+ 
 }
 
 
-
-.completeBTN {
+.completeBTN, .detailsBTN {
   border: 2.3px solid black;
+  background-color: white;
   margin: 10px;
+  cursor: pointer;
   
 }
+
+.detailsBTN {
+  
+  
+}
+
+.deleteBTN {
+  
+  
+  
+}
+
+
+
+
+
 
 .incomplete {
   background: none;
@@ -213,6 +228,7 @@ button:focus  {
 
 
 
+/* end of todoContainer */
 
 
 .detailsContainer {
@@ -221,3 +237,4 @@ button:focus  {
   left: 50%;
   
 }
+

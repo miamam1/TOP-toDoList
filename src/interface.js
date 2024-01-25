@@ -181,7 +181,7 @@ function projectShowcase(projects, index) {
     const contentContainer = document.getElementById("contentContainer")
     const project = projects[index].gettoDos()
     
-    if(project.length == 0 && projects[index].title == "home") {
+    if(project.length == 0 && projects[index].title == "home" || project.length == 0 && projects[index].title == "Today") {
         const projectContainer = document.createElement("div")
         projectContainer.classList.add("projectContainer")
         projectContainer.textContent = "I'm empty :( Fill me up with some to dos!"
@@ -275,11 +275,11 @@ function projectShowcase(projects, index) {
 
 
         
-        const binImage = document.createElement("img")
-        binImage.src = bin
-        const deleteBTN = document.createElement("button")
+        
+        const deleteBTN = document.createElement("img")
+        deleteBTN.src = bin
         deleteBTN.classList.add("deleteBTN")
-        deleteBTN.append(binImage)
+        
 
         deleteBTN.onclick = () => {
             projects[index].deletetoDo(i)
@@ -302,11 +302,10 @@ function projectShowcase(projects, index) {
         form/view details which isprobably bad for performance */
         
         
-        const editBTN = document.createElement("button")
-        const editImage = document.createElement("img")
-        editImage.src = edit
+        const editBTN = document.createElement("img")
+        editBTN.src = edit
         editBTN.classList.add("editBTN")
-        editBTN.append(editImage)
+        
         
         editBTN.onclick = () => {
             const gettoDos = projects[index].gettoDos()
