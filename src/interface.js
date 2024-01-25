@@ -196,6 +196,10 @@ function projectShowcase(projects, index) {
         const deleteMe = document.createElement("button")
         deleteMe.textContent = "Delete"
         deleteMe.style.width = "50px"
+        deleteMe.style.height = "50px"
+        deleteMe.style.cursor = "pointer"
+        deleteMe.style.backgroundColor = "white"
+        deleteMe.style.border = "2.3px solid black"
         deleteMe.onclick = () => {
             projects.splice(index, 1)
             const eraser = document.getElementsByClassName("sideBarContainer")
@@ -385,26 +389,39 @@ function projectShowcase(projects, index) {
                 gettoDo.changetoinComplete()
                 completeBTN.classList.remove("complete")
                 completeBTN.classList.add("incomplete")
+                toDoContainer.style.opacity = "1"
+                titleText.style.textDecoration = "none"
                 
             } else {
                 gettoDo.changetoComplete()
                 completeBTN.classList.remove("incomplete")
                 completeBTN.classList.add("complete")
+                toDoContainer.style.opacity = "0.5"
+                titleText.style.textDecoration = "line-through"
                 
             } 
         }
         completeBTN.classList.add(getComplete, "completeBTN")
+        if(getComplete == "complete") {
+            toDoContainer.style.opacity = "0.5"
+            titleText.style.textDecoration = "line-through"
+        }
         
         
         /* needs to read from complete, think about local browser storage, a to do is completed but when you reload it is uncompleted, so it needs to be read
             for ui probably just do the top answer but wihtout tick, filled black = complete, white but black border = not complete, obv with transparency and crossed line 
         */
+        const flexContainer = document.createElement("div")
+        flexContainer.append(priorityContainer, completeBTN, titleText)
+        const flexContainer2 = document.createElement("div")
+        flexContainer2.append(detailsBTN, dueDateText, editBTN, deleteBTN)
 
-        
 
+        flexContainer.classList.add("flexContainer")
+        flexContainer2.classList.add("flexContainer2")
         toDoContainer.classList.add("toDoContainer")
         projectContainer.classList.add("projectContainer")
-        toDoContainer.append(priorityContainer, completeBTN, titleText, detailsBTN, dueDateText, editBTN, deleteBTN)
+        toDoContainer.append(flexContainer, flexContainer2)
         projectContainer.append(toDoContainer)
         contentContainer.append(projectContainer)
     }
