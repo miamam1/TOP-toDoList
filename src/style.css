@@ -260,11 +260,19 @@ button:focus  {
   display: flex;
   flex-direction: column;
   width: 50%;
-
+  
 }
 
-.detailsContainer button {
-  background-color: white;
-  border: 2.3 solid black;
-  align-self: flex-start;
+.detailsContainer img {
+  width: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  cursor: pointer;
+}
+
+
+.detailsBold {
+  font-weight: bold;
 }

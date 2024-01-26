@@ -1,7 +1,7 @@
 import { Project, newProject, toDo } from "./index"
 import bin from "./delete-outline.svg"
 import edit from "./file-edit-outline.svg"
-
+import exit from "./close-box-outline.svg"
 function navBar(projects) {
     const navBar = document.createElement("div")
     const title = document.createElement("h1")
@@ -109,6 +109,11 @@ function navBar(projects) {
     submitBTN.type = "button"
     submitBTN.value = "Submit"
     submitBTN.onclick = (event) => {
+        if(inputProjectTitle.value = "home") {
+            projectShowcase(projects, 0)
+            newProjectForm.style.display = "none"
+            return
+        }
         newProject(inputProjectTitle.value, projects)
         newProjectForm.style.display = "none"
         let x = projects.length - 1
@@ -245,21 +250,27 @@ function projectShowcase(projects, index) {
             maybe take on away to account for the exit button which should be at the end of the list you get because you just clicked the button, maybe */
             toDoInfo = project[i].getInfo()
             const titleText = document.createElement("p")
-            titleText.textContent = "Title: " + toDoInfo[0]
+            titleText.textContent = toDoInfo[0]
+            titleText.style.fontSize = "50px"
+            titleText.style.fontWeight = "bold"
 
             const dueDateText = document.createElement("p")
-            dueDateText.textContent = "Due date: " + toDoInfo[2]
+            dueDateText.innerHTML = `<p> <span class = "detailsBold">Due: </span>${toDoInfo[2]}</p>`
 
             const priorityText = document.createElement("p")
-            priorityText.textContent = "Priority: " + toDoInfo[3]
+            priorityText.innerHTML = `<p> <span class = "detailsBold">Priority: </span>${toDoInfo[3]}</p>`
+            
+
 
             const detailsContainer = document.createElement("div")
 
             const descriptionText = document.createElement("p")
-            descriptionText.textContent = "Description: " + toDoInfo[1]
+            // descriptionText.textContent = "Description: " + toDoInfo[1]
+            descriptionText.innerHTML = `<p> <span class = "detailsBold">Description: </span>${toDoInfo[1]}</p>`
 
             const completeText = document.createElement("p")
-            completeText.textContent = "Status: " + toDoInfo[4]
+            // completeText.textContent = "Status: " + toDoInfo[4]
+            completeText.innerHTML = `<p> <span class = "detailsBold">Status: </span>${toDoInfo[4]}</p>`
 
             detailsContainer.classList.add("detailsContainer")
 
@@ -270,10 +281,11 @@ function projectShowcase(projects, index) {
             navBar[0].style.filter = "blur(4px)"
             navBar[0].style.pointerEvents = "none"
             navBar[0].style.userSelect = "none"
-            const exitButton = document.createElement("button")
-            exitButton.textContent = "Exit"
-
-
+            const exitButton = document.createElement("img")
+            exitButton.src = exit
+            
+            const textContainer = document.createElement("div")
+            textContainer.append(titleText, dueDateText, priorityText, completeText, descriptionText)
             exitButton.onclick = () => {
                 contentContainer.style.filter = "blur(0)"
                 contentContainer.style.pointerEvents = "auto"
@@ -287,7 +299,7 @@ function projectShowcase(projects, index) {
 
 
 
-            detailsContainer.append(titleText, dueDateText, priorityText, completeText, descriptionText, exitButton)
+            detailsContainer.append(textContainer, exitButton)
             document.body.append(detailsContainer)
             
         }
