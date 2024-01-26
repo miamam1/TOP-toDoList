@@ -42,6 +42,7 @@ function navBar(projects) {
     const submittoDo = document.createElement("input")
     submittoDo.type = 'button'
     submittoDo.value = 'Submit'
+
     const checker = document.getElementsByClassName("sideBarProject")
     submittoDo.onclick = (event) => {
         let index;
@@ -88,12 +89,13 @@ function navBar(projects) {
     newProjectBTN.textContent = "New Project"
 
     newProjectBTN.onclick = () => {
-        newProjectForm.style.display = "block"
+        newProjectForm.style.display = "flex"
         
          
     }
 
     const newProjectForm = document.createElement("form")
+    newProjectForm.classList.add("newProjectForm")
     const inputProjectTitle = document.createElement("input")
     inputProjectTitle.type = "text"
     inputProjectTitle.value = ""
