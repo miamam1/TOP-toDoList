@@ -2,6 +2,7 @@ import { Project, newProject, toDo } from "./index"
 import bin from "./delete-outline.svg"
 import edit from "./file-edit-outline.svg"
 import exit from "./close-box-outline.svg"
+import tick from "./check.svg"
 function navBar(projects) {
     const navBar = document.createElement("div")
     const title = document.createElement("h1")
@@ -283,8 +284,8 @@ function projectShowcase(projects, index) {
             navBar[0].style.userSelect = "none"
             const exitButton = document.createElement("img")
             exitButton.src = exit
-            
             const textContainer = document.createElement("div")
+            textContainer.classList.add("textContainer")
             textContainer.append(titleText, dueDateText, priorityText, completeText, descriptionText)
             exitButton.onclick = () => {
                 contentContainer.style.filter = "blur(0)"
@@ -324,13 +325,7 @@ function projectShowcase(projects, index) {
 
 
         
-        /* Two problems:
-            - checkedBox only returns the default value when the form pops up e.g. if your form pruiority was low and you change it to high it will reutrn low still
-            - Color doesnt change even if it isnt high already, problem with projectShowcase color logic 
-        */ 
         
-        /* probably better to put this outside of the for loop cus rn i think every possible todo has its own
-        form/view details which isprobably bad for performance */
         
         
         const editBTN = document.createElement("img")
@@ -414,6 +409,8 @@ function projectShowcase(projects, index) {
             const getComplete = gettoDoInfo[4]
             if(getComplete == "complete") {
                 gettoDo.changetoinComplete()
+                const tickIMG = document.getElementsByClassName(`tickIMG${i}`)
+                tickIMG[0].remove()
                 completeBTN.classList.remove("complete")
                 completeBTN.classList.add("incomplete")
                 toDoContainer.style.opacity = "1"
@@ -421,6 +418,11 @@ function projectShowcase(projects, index) {
                 
             } else {
                 gettoDo.changetoComplete()
+                const tickIMG = document.createElement("img")
+                tickIMG.classList.add(`tickIMG${i}`)
+                tickIMG.src = tick
+                tickIMG.style.zIndex = "7"
+                completeBTN.append(tickIMG)
                 completeBTN.classList.remove("incomplete")
                 completeBTN.classList.add("complete")
                 toDoContainer.style.opacity = "0.5"
@@ -432,6 +434,10 @@ function projectShowcase(projects, index) {
         if(getComplete == "complete") {
             toDoContainer.style.opacity = "0.5"
             titleText.style.textDecoration = "line-through"
+            const tickIMG = document.createElement("img")
+            tickIMG.classList.add(`tickIMG${i}`)
+            tickIMG.src = tick
+            completeBTN.append(tickIMG)
         }
         
         

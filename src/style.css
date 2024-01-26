@@ -242,7 +242,7 @@ button:focus  {
 }
 
 .complete {
-  background-color: black;
+  
 }
 
 
@@ -273,6 +273,9 @@ button:focus  {
 }
 
 
+
+
 .detailsBold {
   font-weight: bold;
+  
 }
