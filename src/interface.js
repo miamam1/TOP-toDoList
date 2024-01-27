@@ -40,6 +40,7 @@ function navBar(projects) {
     radioBTN3.name = "priorityINPUT"
 
     const submittoDo = document.createElement("input")
+    
     submittoDo.type = 'button'
     submittoDo.value = 'Submit'
 
@@ -90,19 +91,25 @@ function navBar(projects) {
 
     newProjectBTN.onclick = () => {
         newProjectForm.style.display = "flex"
-        
+        inputProjectTitle.value = ""
+        inputProjectTitle.style.backgroundColor = "white"
+        inputProjectTitle.placeholder = "Project title..."
          
     }
 
     const newProjectForm = document.createElement("form")
     newProjectForm.classList.add("newProjectForm")
+    const titleprojectForm = document.createElement("h1")
+    titleprojectForm.textContent = "New project name?"
     const inputProjectTitle = document.createElement("input")
     inputProjectTitle.type = "text"
     inputProjectTitle.value = ""
     inputProjectTitle.title = "title"
+    inputProjectTitle.style.border = "2.3px solid black"
     inputProjectTitle.placeholder = "Project title..."
-    const closeBTN = document.createElement("button")
-    closeBTN.textContent = "Close"
+    const closeBTN = document.createElement("img")
+    closeBTN.src = exit
+    closeBTN.classList.add("newProjectcloseBTN")
     closeBTN.onclick = (event) => {
         newProjectForm.style.display = "none"
         inputProjectTitle.value = ""
@@ -111,12 +118,23 @@ function navBar(projects) {
     const submitBTN = document.createElement("input")
     submitBTN.type = "button"
     submitBTN.value = "Submit"
+    submitBTN.style.border = "2.3px solid black"
+    submitBTN.style.backgroundColor = "white"
+    submitBTN.style.cursor = "pointer"
+    
     submitBTN.onclick = (event) => {
-        if(inputProjectTitle.value = "home") {
+        event.preventDefault()
+        if(inputProjectTitle.value == "home") {
             projectShowcase(projects, 0)
+
             newProjectForm.style.display = "none"
             return
         }
+        if(inputProjectTitle.value == "") {
+            inputProjectTitle.placeholder = "Please input something!"
+            inputProjectTitle.style.backgroundColor = "red"
+            return 
+        } 
         newProject(inputProjectTitle.value, projects)
         newProjectForm.style.display = "none"
         let x = projects.length - 1
@@ -124,10 +142,10 @@ function navBar(projects) {
         sideBar(projects)
         projectShowcase(projects, x)
         inputProjectTitle.value = ""
-        event.preventDefault()
+        
     }
 
-    newProjectForm.append(inputProjectTitle, closeBTN, submitBTN)
+    newProjectForm.append(titleprojectForm, inputProjectTitle, closeBTN, submitBTN)
     newProjectForm.style.display = "none"
     document.body.append(newProjectForm)
 
