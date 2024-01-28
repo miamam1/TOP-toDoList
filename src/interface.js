@@ -8,6 +8,13 @@ function navBar(projects) {
     const title = document.createElement("h1")
     const newtoDoBTN = document.createElement("button")
     newtoDoBTN.onclick = () => {
+        const contentContainer = document.getElementById("contentContainer")
+        contentContainer.style.filter = "blur(4px)"
+        contentContainer.style.pointerEvents = "none"
+        contentContainer.style.userSelect = "none"
+        navBar.style.filter = ("blur(4px)")
+        navBar.style.pointerEvents = "none"
+        navBar.style.userSelect = "none"
         toDoForm.style.display = "flex"
         
     }
@@ -35,22 +42,38 @@ function navBar(projects) {
     radioBTN1.type = 'radio'
     radioBTN1.value = 'low'
     radioBTN1.name = "priorityINPUT"
+    radioBTN1.classList.add("radioBTN1")
     const radioBTN2 = document.createElement("input")
     radioBTN2.type = 'radio'
     radioBTN2.value = 'medium'
     radioBTN2.name = "priorityINPUT"
+    radioBTN2.classList.add("radioBTN2")
     const radioBTN3 = document.createElement("input")
     radioBTN3.type = 'radio'
     radioBTN3.value = 'high'
     radioBTN3.name = "priorityINPUT"
-
+    radioBTN3.classList.add("radioBTN3")
+    const radioBTNContainer = document.createElement("div")
+    radioBTNContainer.append(radioBTN1, radioBTN2, radioBTN3)
+   
     const submittoDo = document.createElement("input")
     
     submittoDo.type = 'button'
     submittoDo.value = 'Submit'
 
     const checker = document.getElementsByClassName("sideBarProject")
+    submittoDo.style.backgroundColor = "white"
+    submittoDo.style.border = "2.3px solid black"
+    submittoDo.style.cursor = "pointer"
     submittoDo.onclick = (event) => {
+        /* need to add input validation here, make sure it doesn tbreak blur thing */ 
+        const contentContainer = document.getElementById("contentContainer")
+        contentContainer.style.filter = "blur(0px)"
+        contentContainer.style.pointerEvents = "auto"
+        contentContainer.style.userSelect = "auto"
+        navBar.style.filter = ("blur(0px)")
+        navBar.style.pointerEvents = "auto"
+        navBar.style.userSelect = "auto"
         let index;
         for(let i = 0; i < checker.length; i++) {
             if(checker[i].classList.contains("active")) {
@@ -75,6 +98,13 @@ function navBar(projects) {
         closeForm.textContent = "Close"
         
         closeForm.onclick = (event) => {
+            const contentContainer = document.getElementById("contentContainer")
+            contentContainer.style.filter = "blur(0px)"
+            contentContainer.style.pointerEvents = "auto"
+            contentContainer.style.userSelect = "auto"
+            navBar.style.filter = ("blur(0px)")
+            navBar.style.pointerEvents = "auto"
+            navBar.style.userSelect = "auto"
             toDoForm.style.display = "none"
              toDoForm.style.display = "none"
             inputTitle.value = ""
@@ -82,7 +112,7 @@ function navBar(projects) {
             inputDate.value = ""
             event.preventDefault()
         }
-    toDoForm.append(inputTitle, inputDescription, inputDate, radioBTN1, radioBTN2, radioBTN3, submittoDo, closeForm)
+    toDoForm.append(inputTitle, inputDescription, inputDate, radioBTNContainer, submittoDo, closeForm)
     document.body.append(toDoForm)
     toDoForm.style.display = "none"
 
@@ -101,6 +131,10 @@ function navBar(projects) {
         contentContainer.style.filter = "blur(4px)"
         contentContainer.style.pointerEvents = "none"
         contentContainer.style.userSelect = "none"
+        navBar.style.filter = ("blur(4px)")
+        navBar.style.pointerEvents = "none"
+        navBar.style.userSelect = "none"
+
         newProjectForm.style.display = "flex"
         inputProjectTitle.value = ""
         inputProjectTitle.style.backgroundColor = "white"
@@ -127,6 +161,9 @@ function navBar(projects) {
         contentContainer.style.filter = "blur(0px)"
         contentContainer.style.pointerEvents = "auto"
         contentContainer.style.userSelect = "auto"
+        navBar.style.filter = ("blur(0px)")
+        navBar.style.pointerEvents = "auto"
+        navBar.style.userSelect = "auto"
         inputProjectTitle.value = ""
         event.preventDefault()
     }
@@ -142,6 +179,9 @@ function navBar(projects) {
         contentContainer.style.filter = "blur(0px)"
         contentContainer.style.pointerEvents = "auto"
         contentContainer.style.userSelect = "auto"
+        navBar.style.filter = ("blur(0px)")
+        navBar.style.pointerEvents = "auto"
+        navBar.style.userSelect = "auto"
         event.preventDefault()
         if(inputProjectTitle.value == "home") {
             projectShowcase(projects, 0)
@@ -373,6 +413,15 @@ function projectShowcase(projects, index) {
         
         
         editBTN.onclick = () => {
+            const contentContainer = document.getElementById("contentContainer")
+            const NavbarGetter = document.getElementsByClassName("navbar")
+            const navbarDOM = NavbarGetter[0]
+            contentContainer.style.filter = "blur(4px)"
+            contentContainer.style.pointerEvents = "none"
+            contentContainer.style.userSelect = "none"
+            navbarDOM.style.filter = ("blur(4px)")
+            navbarDOM.style.pointerEvents = "none"
+            navbarDOM.style.userSelect = "none"
             const gettoDos = projects[index].gettoDos()
             const gettoDo = gettoDos[i]
             const gettoDoInfo = gettoDos[i].getInfo()
@@ -395,15 +444,21 @@ function projectShowcase(projects, index) {
             const radioBTN1 = document.createElement("input")
             radioBTN1.type = 'radio'
             radioBTN1.value = 'low'
+            radioBTN1.classList.add("radioBTN1")
             radioBTN1.name = "priorityINPUT2"
             const radioBTN2 = document.createElement("input")
             radioBTN2.type = 'radio'
             radioBTN2.value = 'medium'
             radioBTN2.name = "priorityINPUT2"
+            radioBTN2.classList.add("radioBTN2")
             const radioBTN3 = document.createElement("input")
             radioBTN3.type = 'radio'
             radioBTN3.value = 'high'
             radioBTN3.name = "priorityINPUT2"
+            radioBTN3.classList.add("radioBTN3")
+            const radioBTNContainer = document.createElement("div")
+            radioBTNContainer.append(radioBTN1, radioBTN2, radioBTN3)
+   
             edittoDoForm.style.display = "flex"
              if(gettoDoInfo[3] === "low") {
                 radioBTN1.defaultChecked = true
@@ -416,9 +471,21 @@ function projectShowcase(projects, index) {
                 
             } 
             const submitBTN = document.createElement("input")
+            submitBTN.style.backgroundColor = "white"
+            submitBTN.style.border = "2.3px solid black"
+            submitBTN.style.cursor = "pointer"
             submitBTN.type = 'button'
             submitBTN.value = 'Edit'
             submitBTN.onclick = () => {
+                const contentContainer = document.getElementById("contentContainer")
+                const NavbarGetter = document.getElementsByClassName("navbar")
+                const navbarDOM = NavbarGetter[0]
+                contentContainer.style.filter = "blur(0px)"
+                contentContainer.style.pointerEvents = "auto"
+                contentContainer.style.userSelect = "auto"
+                navbarDOM.style.filter = ("blur(0px)")
+                navbarDOM.style.pointerEvents = "auto"
+                navbarDOM.style.userSelect = "auto"
             const checkedBox = document.querySelector('input[name="priorityINPUT2"]:checked').value
             gettoDo.changeTitle(inputTitle.value)
             gettoDo.changeDescription(inputDescription.value)
@@ -431,10 +498,19 @@ function projectShowcase(projects, index) {
              closeBTN.src = exit
             closeBTN.textContent = "Close"
             closeBTN.onclick = (event) => {
+                const contentContainer = document.getElementById("contentContainer")
+                const NavbarGetter = document.getElementsByClassName("navbar")
+                const navbarDOM = NavbarGetter[0]
+                contentContainer.style.filter = "blur(0px)"
+                contentContainer.style.pointerEvents = "auto"
+                contentContainer.style.userSelect = "auto"
+                navbarDOM.style.filter = ("blur(0px)")
+                navbarDOM.style.pointerEvents = "auto"
+                navbarDOM.style.userSelect = "auto"
                 edittoDoForm.remove()
                 event.preventDefault()
             }
-            edittoDoForm.append(inputTitle, inputDescription, inputDate, radioBTN1, radioBTN2, radioBTN3, submitBTN, closeBTN)
+            edittoDoForm.append(inputTitle, inputDescription, inputDate, radioBTNContainer, submitBTN, closeBTN)
             document.body.append(edittoDoForm)
            
         }

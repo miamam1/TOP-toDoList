@@ -153,7 +153,7 @@ button:focus  {
 }
 
 .newProjectForm {
-  width: 25%;
+  min-width: 25%;
   height: 20%;
   position: absolute;
   top: 30%;
@@ -201,16 +201,19 @@ button:focus  {
 .toDoForm {
   border: 2.3px solid black;
   background-color: white;
-  width: 30%;
+  min-width: 10%;
   height: 30%;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   position: absolute;
   top: 30%;
-  left: 38%;
+  left: 47.5%;
+  gap: 10px;
   
 }
+
+
 
 .toDoForm img {
   width: 40px;
@@ -220,6 +223,58 @@ button:focus  {
   right: 0;
   
 }
+
+.radioBTN1, .radioBTN2, .radioBTN3 {
+  cursor: pointer;
+  /* whoever made radio buttons so annoying to style deserves a special place in hell*/
+  
+}
+.radioBTN1:checked::after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: green;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+  
+}
+
+.radioBTN2:checked::after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: orange;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+ 
+}
+
+.radioBTN3:checked::after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: red;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+ 
+}
+
+
 
 
 .flexContainer {
