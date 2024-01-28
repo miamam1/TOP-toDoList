@@ -8,12 +8,17 @@ function navBar(projects) {
     const title = document.createElement("h1")
     const newtoDoBTN = document.createElement("button")
     newtoDoBTN.onclick = () => {
-        toDoForm.style.display = "block"
+        toDoForm.style.display = "flex"
         
     }
 
     const newProjectBTN = document.createElement("button")
+    /* probably could have just reused code with editBTN, and had the submit button
+    made dynamically so I could change the on click to edit instead of make a new todo, 
+    but I have already spent a month on this, so I should leave it for now. */
+    
     const toDoForm= document.createElement("form")
+    toDoForm.classList.add("toDoForm")
     const inputTitle = document.createElement("input")
     inputTitle.type = 'text'
     inputTitle.name = 'title'
@@ -65,8 +70,10 @@ function navBar(projects) {
         event.preventDefault()
          }
 
-        const closeForm = document.createElement("button")
+        const closeForm = document.createElement("img")
+         closeForm.src = exit
         closeForm.textContent = "Close"
+        
         closeForm.onclick = (event) => {
             toDoForm.style.display = "none"
              toDoForm.style.display = "none"
@@ -90,6 +97,10 @@ function navBar(projects) {
     newProjectBTN.textContent = "New Project"
 
     newProjectBTN.onclick = () => {
+        const contentContainer = document.getElementById("contentContainer")
+        contentContainer.style.filter = "blur(4px)"
+        contentContainer.style.pointerEvents = "none"
+        contentContainer.style.userSelect = "none"
         newProjectForm.style.display = "flex"
         inputProjectTitle.value = ""
         inputProjectTitle.style.backgroundColor = "white"
@@ -111,7 +122,11 @@ function navBar(projects) {
     closeBTN.src = exit
     closeBTN.classList.add("newProjectcloseBTN")
     closeBTN.onclick = (event) => {
+        const contentContainer = document.getElementById("contentContainer")
         newProjectForm.style.display = "none"
+        contentContainer.style.filter = "blur(0px)"
+        contentContainer.style.pointerEvents = "auto"
+        contentContainer.style.userSelect = "auto"
         inputProjectTitle.value = ""
         event.preventDefault()
     }
@@ -123,10 +138,14 @@ function navBar(projects) {
     submitBTN.style.cursor = "pointer"
     
     submitBTN.onclick = (event) => {
+        const contentContainer = document.getElementById("contentContainer")
+        contentContainer.style.filter = "blur(0px)"
+        contentContainer.style.pointerEvents = "auto"
+        contentContainer.style.userSelect = "auto"
         event.preventDefault()
         if(inputProjectTitle.value == "home") {
             projectShowcase(projects, 0)
-
+            
             newProjectForm.style.display = "none"
             return
         }
@@ -358,6 +377,7 @@ function projectShowcase(projects, index) {
             const gettoDo = gettoDos[i]
             const gettoDoInfo = gettoDos[i].getInfo()
             const edittoDoForm = document.createElement("form")
+            edittoDoForm.classList.add("toDoForm")
             const inputTitle = document.createElement("input")
             inputTitle.type = 'text'
             inputTitle.name = 'title'
@@ -384,6 +404,7 @@ function projectShowcase(projects, index) {
             radioBTN3.type = 'radio'
             radioBTN3.value = 'high'
             radioBTN3.name = "priorityINPUT2"
+            edittoDoForm.style.display = "flex"
              if(gettoDoInfo[3] === "low") {
                 radioBTN1.defaultChecked = true
                 
@@ -406,7 +427,8 @@ function projectShowcase(projects, index) {
             edittoDoForm.remove()
             projectShowcase(projects, index)
              }
-             const closeBTN = document.createElement("button")
+             const closeBTN = document.createElement("img")
+             closeBTN.src = exit
             closeBTN.textContent = "Close"
             closeBTN.onclick = (event) => {
                 edittoDoForm.remove()
