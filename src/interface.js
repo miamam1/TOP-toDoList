@@ -74,6 +74,7 @@ function navBar(projects) {
         const checkedBox = document.querySelector('input[name="priorityINPUT"]:checked')
         if(checkedBox == null || inputTitle.value == "" || inputDescription.value == "" || inputDate.value == "") {
             para.style.display = "block"
+           
             return
         }
         
@@ -189,6 +190,11 @@ function navBar(projects) {
     
     submitBTN.onclick = (event) => {
         const contentContainer = document.getElementById("contentContainer")
+        if(inputProjectTitle.value == "") {
+            inputProjectTitle.placeholder = "Please input something!"
+            inputProjectTitle.style.backgroundColor = "red"
+            return 
+        } 
         contentContainer.style.filter = "blur(0px)"
         contentContainer.style.pointerEvents = "auto"
         contentContainer.style.userSelect = "auto"
@@ -202,11 +208,7 @@ function navBar(projects) {
             newProjectForm.style.display = "none"
             return
         }
-        if(inputProjectTitle.value == "") {
-            inputProjectTitle.placeholder = "Please input something!"
-            inputProjectTitle.style.backgroundColor = "red"
-            return 
-        } 
+        
         newProject(inputProjectTitle.value, projects)
         newProjectForm.style.display = "none"
         let x = projects.length - 1
