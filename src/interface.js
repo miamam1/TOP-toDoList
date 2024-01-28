@@ -16,6 +16,9 @@ function navBar(projects) {
         navBar.style.pointerEvents = "none"
         navBar.style.userSelect = "none"
         toDoForm.style.display = "flex"
+        radioBTN1.checked = false
+        radioBTN2.checked = false
+        radioBTN3.checked = false
         
     }
 
@@ -30,7 +33,6 @@ function navBar(projects) {
     inputTitle.type = 'text'
     inputTitle.name = 'title'
     inputTitle.placeholder = 'Title...'
-    
     const inputDescription = document.createElement("input")
     inputDescription.type = 'text'
     inputDescription.name = 'description'
@@ -66,6 +68,13 @@ function navBar(projects) {
     submittoDo.style.border = "2.3px solid black"
     submittoDo.style.cursor = "pointer"
     submittoDo.onclick = (event) => {
+        const checkedBox = document.querySelector('input[name="priorityINPUT"]:checked').value
+        if(checkedBox === null) {
+            console.log("lol")
+            
+            return 
+
+        }
         /* need to add input validation here, make sure it doesn tbreak blur thing */ 
         const contentContainer = document.getElementById("contentContainer")
         contentContainer.style.filter = "blur(0px)"
@@ -82,7 +91,7 @@ function navBar(projects) {
             }
         }
 
-        const checkedBox = document.querySelector('input[name="priorityINPUT"]:checked').value
+        
         projects[index].addNewtoDo(inputTitle.value, inputDate.value, checkedBox, inputDescription.value)
         console.log(projects[index])
         toDoForm.style.display = "none"
