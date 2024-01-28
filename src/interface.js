@@ -19,6 +19,7 @@ function navBar(projects) {
         radioBTN1.checked = false
         radioBTN2.checked = false
         radioBTN3.checked = false
+        para.style.display = "none"
         
     }
 
@@ -62,19 +63,21 @@ function navBar(projects) {
     
     submittoDo.type = 'button'
     submittoDo.value = 'Submit'
-
+    
     const checker = document.getElementsByClassName("sideBarProject")
     submittoDo.style.backgroundColor = "white"
     submittoDo.style.border = "2.3px solid black"
     submittoDo.style.cursor = "pointer"
+    const para = document.createElement("p")
+    para.textContent = "Please input all areas"
     submittoDo.onclick = (event) => {
-        const checkedBox = document.querySelector('input[name="priorityINPUT"]:checked').value
-        if(checkedBox === null) {
-            console.log("lol")
-            
-            return 
-
+        const checkedBox = document.querySelector('input[name="priorityINPUT"]:checked')
+        if(checkedBox == null || inputTitle.value == "" || inputDescription.value == "" || inputDate.value == "") {
+            para.style.display = "block"
+            return
         }
+        
+        
         /* need to add input validation here, make sure it doesn tbreak blur thing */ 
         const contentContainer = document.getElementById("contentContainer")
         contentContainer.style.filter = "blur(0px)"
@@ -121,7 +124,7 @@ function navBar(projects) {
             inputDate.value = ""
             event.preventDefault()
         }
-    toDoForm.append(inputTitle, inputDescription, inputDate, radioBTNContainer, submittoDo, closeForm)
+    toDoForm.append(inputTitle, inputDescription, inputDate, radioBTNContainer, para, submittoDo, closeForm)
     document.body.append(toDoForm)
     toDoForm.style.display = "none"
 
@@ -182,6 +185,7 @@ function navBar(projects) {
     submitBTN.style.border = "2.3px solid black"
     submitBTN.style.backgroundColor = "white"
     submitBTN.style.cursor = "pointer"
+    
     
     submitBTN.onclick = (event) => {
         const contentContainer = document.getElementById("contentContainer")
@@ -485,7 +489,14 @@ function projectShowcase(projects, index) {
             submitBTN.style.cursor = "pointer"
             submitBTN.type = 'button'
             submitBTN.value = 'Edit'
+            const p = document.createElement("p")
+            p.textContent = "Please input all areas."
+            p.style.display = "none"
             submitBTN.onclick = () => {
+                if(inputTitle.value == "" || inputDescription.value == "" || inputDate.value == "") {
+                    p.style.display = "block"
+                    return 
+                }
                 const contentContainer = document.getElementById("contentContainer")
                 const NavbarGetter = document.getElementsByClassName("navbar")
                 const navbarDOM = NavbarGetter[0]
@@ -519,7 +530,7 @@ function projectShowcase(projects, index) {
                 edittoDoForm.remove()
                 event.preventDefault()
             }
-            edittoDoForm.append(inputTitle, inputDescription, inputDate, radioBTNContainer, submitBTN, closeBTN)
+            edittoDoForm.append(inputTitle, inputDescription, inputDate, radioBTNContainer, p, submitBTN, closeBTN)
             document.body.append(edittoDoForm)
            
         }
