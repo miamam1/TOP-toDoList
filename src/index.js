@@ -3,12 +3,13 @@ import { navBar, sideBar, projectShowcase } from './interface';
 
 
 class toDo {
-    constructor(title, dueDate, priority, description = " ") {
+    constructor(title, dueDate, priority, description = " ", complete = "incomplete") {
         this.title = title;
         this.description = description
         this.dueDate = dueDate
         this.priority = priority
-        this.complete = "incomplete"
+        
+        this.complete = complete
     }
     
     getInfo() {
@@ -60,9 +61,9 @@ make sure DOM logic is seperate  */
 /* could add a fn in the project class to allow this */ 
 
 class Project {
-    constructor(title) {
+    constructor(title, array = []) {
         this.title = title
-        this.array = []
+        this.array = array
     }
     
     addNewtoDo(title, description, dueDate, priority) {
@@ -121,29 +122,88 @@ function storageAvailable(type) {
     }
   }
 
+
+function populateStorage() {
+    let projects = []
+    newProject("home", projects)
+    newProject("Today", projects)
+    newProject("Example project", projects)
+    projects[0].addNewtoDo("Go to the gym!", "2023-01-11", "medium", "Lose some weight fatty!")
+    projects[0].addNewtoDo("Touch grass", "2025-05-19", "low", "Too hard :(")
+    projects[0].addNewtoDo("Start drinking more water", "2024-01-19", "high", "mmm yummy water")
+    projects[1].addNewtoDo("Go to the gym!", "2023-01-11", "medium", "Lose some weight fatty!")
+    projects[1].addNewtoDo("Play fortnite", "2025-05-19", "low", "petter griffin")
+    projects[1].addNewtoDo("Start drinking", "2024-01-19", "high", "mmm yummy")
+    return projects
+
+}
+
 if(storageAvailable("localStorage")) {
-    // general idea: on windows load, get the previous local browser storage thing, convert it into a list like let projects = [] then put that into a temporary variable, meaning i don tneed to change all
-    // the stuff
-    // then on page close/reload, change it back to a JSON string which can be reparsed on next load
+    let parsedProjects
+    if(!localStorage.getItem("projects")) {
+        localStorage.setItem("projects", JSON.stringify(populateStorage()))
+        parsedProjects = JSON.parse(localStorage["projects"])
+        console.log("This is a first time load!")
+        console.log(parsedProjects)
+    } else {
+        parsedProjects = JSON.parse(localStorage.getItem("projects"))
+        console.log("This is a second time load!")
+
+    }
+   
+    let parsedProjectsClassConverter = []
+    for(let i = 0; i < parsedProjects.length; i++) {
+        let m = new Project(parsedProjects[i].title, parsedProjects[i].array)
+        parsedProjectsClassConverter.push(m)
+        let projectToDos = parsedProjectsClassConverter[i].gettoDos()
+        for(let i = 0; i < projectToDos.length; i++) {
+            let toDoList = projectToDos[i]
+            let [title, description, dueDate, priority, complete] = Object.values(toDoList)
+            let m = new toDo(title, dueDate, priority, description, complete)
+            projectToDos[i] = m
+            console.log(projectToDos)
+        }
+        
+    }
+    parsedProjects = parsedProjectsClassConverter
+
+    window.onbeforeunload = function () {
+        /* cus of this if you try to remove localStorage then it wont, it will still retain localstorage even if you try to remove it on browser */ 
+        localStorage.setItem("projects", JSON.stringify(parsedProjects))
+
+    }
+
+   
+    
+    navBar(parsedProjects)
+    sideBar(parsedProjects)
+    const home = document.getElementsByClassName("sideBarProject")
+    home[0].click()
+    console.log(parsedProjects)
+    console.log(populateStorage())
 }
     else {
-        /* do let = projects [] and populate with home and Today as default projects */ 
-        console.log(" :(")
+        console.log("Damn that sucks. This page is gonna forget everything you put in once you refresh because of how old it is! Get a better browser man.")
+        let projects = []
+        projects[0].addNewtoDo("Update your browser.", "2023-01-11", "medium", "Locabrowser storage isn't supported, so this is gonna forget everything on refresh.")
+        navBar(projects)
+        sideBar(projects)
     }
 
 
+    
 
 
-let projects = []
 
-navBar(projects)
+
+
 
 /* doing this in interface causes an error. I don't know why but has to be something to do with initialization order with the project class*/
 
 
-newProject("home", projects)
+/*newProject("home", projects)
 newProject("Today", projects)
-newProject("A project", projects)
+newProject("Example project", projects)
 
 sideBar(projects)
 
@@ -159,10 +219,10 @@ projects[1].addNewtoDo("titleB2", "2025-05-19", "medium", "DescriptionB2")
 projects[1].addNewtoDo("titleB3", "2024-01-19", "low", "DescriptionB3")
 projects[2].addNewtoDo("titleB", "2023-01-11", "high", "DescriptionB")
 projects[2].addNewtoDo("titleB2", "2025-05-19", "medium", "DescriptionB2")
-projects[1].addNewtoDo("titleB3", "2024-01-19", "low", "DescriptionB3")
+projects[1].addNewtoDo("titleB3", "2024-01-19", "low", "DescriptionB3") */
 
-const home = document.getElementsByClassName("sideBarProject")
-home[0].click()
+// const home = document.getElementsByClassName("sideBarProject")
+// home[0].click()
 
 
 export {

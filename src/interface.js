@@ -96,7 +96,7 @@ function navBar(projects) {
         }
 
         
-        projects[index].addNewtoDo(inputTitle.value, inputDate.value, checkedBox, inputDescription.value)
+        projects[index].addNewtoDo(inputTitle.value, inputDate.value, checkedBox.value, inputDescription.value)
         console.log(projects[index])
         toDoForm.style.display = "none"
         inputTitle.value = ""
